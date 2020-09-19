@@ -40,3 +40,10 @@ div.page-button-view{
 }
 div.page-button{
 }
+hr{
+  size: 10px;
+}
+a.site-policy{
+  width: 115px;
+  margin: 10px;
+}

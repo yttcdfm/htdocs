@@ -9,3 +9,7 @@ var contentsPane = createContentsPane(pictureJson, 1);
 body.appendChild(contentsPane);
 
 var divPageButtonView = createDivPageButtonView(pictureJson.length);
+var bottom = createBottom();
+
+body.appendChild(divPageButtonView);
+body.appendChild(bottom);

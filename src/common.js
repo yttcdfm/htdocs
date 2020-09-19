@@ -165,7 +165,6 @@ function createDivPageButton(totalPageSize){
 }
 
 function createDivPageButtonView(resultColSize){
-  var body = document.getElementById('hogehoge');
   var divPageButtonView = document.createElement('div');
   divPageButtonView.setAttribute('class', 'page-button-view');
 
@@ -177,5 +176,28 @@ function createDivPageButtonView(resultColSize){
 
   divPageButtonView.appendChild(resultPTag);
   divPageButtonView.appendChild(divPageButton);
-  body.appendChild(divPageButtonView);
+  return divPageButtonView;
+}
+
+function onClick_sitePolicy(){
+  var site_policy = 'サイトポリシー\n' +
+                    '・ エロ動画無料まとめサイト ポチットはアダルトサイトです。\n' +
+                    '・ 18才未満の方はエロ動画を閲覧しないでください。\n' +
+                    '・ 本サイトからのリンクを経由してアクセスした外部サイトに関しましては、\n   当サイトは一切関与致しません。\n\n' +
+                    '本サイト上におきまして、権利を侵害するようなエロ動画へのリンク、画像がございましたら、速やかにエロ動画リンクを削除する措置を取らせていただいております。発見された場合はお問い合わせフォームよりご連絡お願いします。\n\n';
+  alert(site_policy);
+}
+
+function createBottom(){
+  var divBottom = document.createElement('div');
+  divBottom.setAttribute('class', 'bottom');
+  var hrTag = document.createElement('hr');
+  var endExplain1 = document.createElement('a');
+  endExplain1.setAttribute('class', 'site-policy');
+  endExplain1.setAttribute('onclick', 'onClick_sitePolicy()');
+  endExplain1.innerText = 'サイトポリシー';
+  
+  divBottom.appendChild(hrTag);
+  divBottom.appendChild(endExplain1);
+  return divBottom;
 }

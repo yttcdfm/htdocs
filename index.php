@@ -28,6 +28,7 @@ function getPicture($result){
 require_once('./src/common.php');
 connect_db();
 $result = selectAll('picture');
+doPOST('access_view');
 $pdo = null;
 
 $picture_json_array = getPicture($result);
