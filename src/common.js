@@ -128,23 +128,42 @@ function createPageButton(pageIndex){
 
 function onClick_pageButtonNext(nextId, totalPageSize){
   //次の番号があるか
-  if(nextId < totalPageSize){
+  if(nextId <= totalPageSize){
     //ページボタン先頭の配列から詰めていく
     var divPageButton = createDivPageButton(totalPageSize, nextId - 4);
     var oldDivPageButton = document.getElementsByClassName('page-button');
     oldDivPageButton.item(0).innerHTML = divPageButton.innerHTML;
   }
-  
+}
+
+function onClick_pageButtonPrevious(previousId, totalPageSize){
+  //前の番号があるか
+  if(1 <= previousId){
+    //ページボタン先頭の配列から詰めていく
+    var divPageButton = createDivPageButton(totalPageSize, previousId);
+    var oldDivPageButton = document.getElementsByClassName('page-button');
+    oldDivPageButton.item(0).innerHTML = divPageButton.innerHTML;
+  }
 }
 
 function createPageButtonNext(nextId, totalPageSize){
-  var pageButton = document.createElement('button');
-  pageButton.setAttribute('class', 'page-button');
-  pageButton.setAttribute('onclick', 'onClick_pageButtonNext(' + nextId + ', ' + totalPageSize + ')');
-  pageButton.setAttribute('data-nextId', nextId);
+  var pageButtonNext = document.createElement('button');
+  pageButtonNext.setAttribute('class', 'page-button');
+  pageButtonNext.setAttribute('onclick', 'onClick_pageButtonNext(' + nextId + ', ' + totalPageSize + ')');
+  pageButtonNext.setAttribute('data-nextId', nextId);
   //クリック時の動きを書く
-  pageButton.innerText = '>';
-  return pageButton;
+  pageButtonNext.innerText = '>';
+  return pageButtonNext;
+}
+
+function createPageButtonPrevious(previousId, totalPageSize){
+  var pageButtonPrevious = document.createElement('button');
+  pageButtonPrevious.setAttribute('class', 'page-button');
+  pageButtonPrevious.setAttribute('onclick', 'onClick_pageButtonPrevious(' + previousId + ', ' + totalPageSize + ')');
+  pageButtonPrevious.setAttribute('data-previousId', previousId);
+  //クリック時の動きを書く
+  pageButtonPrevious.innerText = '<';
+  return pageButtonPrevious;
 }
 
 function createDivPageButton(totalPageSize, startId){
@@ -152,7 +171,14 @@ function createDivPageButton(totalPageSize, startId){
   divPageButton.setAttribute('class', 'page-button');
 
   if(totalPageSize > (startId + 4)){
-  //5ページより多い場合
+    //5ページより多い場合
+    
+    //スタートページIDが2から始まる場合
+    if(startId >= 2){
+      var pageButtonPrevious = createPageButtonPrevious(startId - 1, totalPageSize);
+      divPageButton.appendChild(pageButtonPrevious);
+    }
+    
     var nextId = 0;
     for(var i = startId; i <= (startId + 4); i++){
       var pageButton = createPageButton(i);
@@ -164,8 +190,8 @@ function createDivPageButton(totalPageSize, startId){
       }
     }
     
-    var pageButton = createPageButtonNext(nextId, totalPageSize);
-    divPageButton.appendChild(pageButton);
+    var pageButtonNext = createPageButtonNext(nextId, totalPageSize);
+    divPageButton.appendChild(pageButtonNext);
   }else if(totalPageSize >= startId){
   //5ページまでの場合
     for(var i = startId; i <= (startId + 4); i++){
