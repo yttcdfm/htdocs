@@ -94,8 +94,15 @@ function createContentsPane(pictureJson, pageIndex){
   if(pictureJson.length > contentsEndIndex){
     displaiSize = contentsEndIndex;
   }
+  
+  if(pictureJson.length < contentsEndIndex){
+     
+  }
 
   for(var i = contentsStartIndex; i < contentsEndIndex; i++){
+    if(i == displaySize){
+       break;
+    }
     if((i > contentsStartIndex) && ((i % 3) == 0)){
       contents.appendChild(createContentsRowTag(array));
       array = [];
@@ -170,15 +177,14 @@ function createDivPageButton(totalPageSize, startId){
   var divPageButton = document.createElement('div');
   divPageButton.setAttribute('class', 'page-button');
 
+  //スタートページIDが2以上
+  if(startId >= 2){
+    var pageButtonPrevious = createPageButtonPrevious(startId - 1, totalPageSize);
+    divPageButton.appendChild(pageButtonPrevious);
+  }
+  
   if(totalPageSize > (startId + 4)){
     //5ページより多い場合
-    
-    //スタートページIDが2から始まる場合
-    if(startId >= 2){
-      var pageButtonPrevious = createPageButtonPrevious(startId - 1, totalPageSize);
-      divPageButton.appendChild(pageButtonPrevious);
-    }
-    
     var nextId = 0;
     for(var i = startId; i <= (startId + 4); i++){
       var pageButton = createPageButton(i);
