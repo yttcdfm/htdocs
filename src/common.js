@@ -126,36 +126,50 @@ function createPageButton(pageIndex){
   return pageButton;
 }
 
-function onClick_pageButtonNext(){
-
+function onClick_pageButtonNext(nextId, totalPageSize){
+  //次の番号があるか
+  if(nextId < totalPageSize){
+    //ページボタン先頭の配列から詰めていく
+    var divPageButton = createDivPageButton(totalPageSize, nextId - 4);
+    var oldDivPageButton = document.getElementsByClassName('page-button');
+    oldDivPageButton.item(0).innerHTML = divPageButton.innerHTML;
+  }
+  
 }
 
-function createPageButtonNext(){
+function createPageButtonNext(nextId, totalPageSize){
   var pageButton = document.createElement('button');
   pageButton.setAttribute('class', 'page-button');
-  pageButton.setAttribute('onclick', 'onClick_pageButtonNext()');
+  pageButton.setAttribute('onclick', 'onClick_pageButtonNext(' + nextId + ', ' + totalPageSize + ')');
+  pageButton.setAttribute('data-nextId', nextId);
   //クリック時の動きを書く
   pageButton.innerText = '>';
   return pageButton;
 }
 
-function createDivPageButton(totalPageSize){
+function createDivPageButton(totalPageSize, startId){
   var divPageButton = document.createElement('div');
   divPageButton.setAttribute('class', 'page-button');
 
-  if(totalPageSize > 5){
+  if(totalPageSize > (startId + 4)){
   //5ページより多い場合
-    for(var i = 1; i <= 5; i++){
+    var nextId = 0;
+    for(var i = startId; i <= (startId + 4); i++){
       var pageButton = createPageButton(i);
       divPageButton.appendChild(pageButton);
+      
+      if(i == (startId + 4)){
+         nextId = i;
+         nextId++;
+      }
     }
     
-    var pageButton = createPageButtonNext();
+    var pageButton = createPageButtonNext(nextId, totalPageSize);
     divPageButton.appendChild(pageButton);
-  }else if(totalPageSize >= 1){
+  }else if(totalPageSize >= startId){
   //5ページまでの場合
-    for(var i = 1; i <= 5; i++){
-      for(var i = 1; i <= totalPageSize; i++){
+    for(var i = startId; i <= (startId + 4); i++){
+      for(var i = startId; i <= totalPageSize; i++){
         var pageButton = createPageButton(i);
         divPageButton.appendChild(pageButton);
       }
@@ -172,7 +186,7 @@ function createDivPageButtonView(resultColSize){
   resultPTag.innerText = resultColSize + '件の動画が見つかりました'; 
 
   var totalPageSize = Math.ceil(resultColSize / 30);
-  var divPageButton = createDivPageButton(totalPageSize);
+  var divPageButton = createDivPageButton(totalPageSize, 1);
 
   divPageButtonView.appendChild(resultPTag);
   divPageButtonView.appendChild(divPageButton);
