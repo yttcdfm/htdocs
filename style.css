@@ -1,0 +1,42 @@
+body{
+  background-color: #fce2c4;
+}
+div.contents-row{
+  display: flex;
+  flex-direction: row;
+}
+div.content{
+  background-color: yellow;
+  display: flex;
+  margin: 8px;
+  width: 400px;
+  height: 120px;
+}
+div.img{
+  width: 147px;
+  height: 100%;
+  margin: 4px;
+}
+div.content-explain{
+  width: 253px;
+  height: 100%;
+}
+img{
+  max-width: 100%;
+  height: auto;
+  width /***/:auto;
+}
+p.content{
+  margin: 0px;
+  font-size: 5px
+}
+a{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+div.page-button-view{
+}
+div.page-button{
+}
