@@ -188,16 +188,28 @@ function onClick_sitePolicy(){
   alert(site_policy);
 }
 
+function onClick_siteList(){
+  
+}
+
 function createBottom(){
   var divBottom = document.createElement('div');
   divBottom.setAttribute('class', 'bottom');
   var hrTag = document.createElement('hr');
+  
   var endExplain1 = document.createElement('a');
   endExplain1.setAttribute('class', 'site-policy');
   endExplain1.setAttribute('onclick', 'onClick_sitePolicy()');
   endExplain1.innerText = 'サイトポリシー';
   
+  var endExplain2 = document.createElement('a');
+  endExplain2.setAttribute('class', 'site-list');
+  endExplain2.setAttribute('onclick', 'onClick_siteList()');
+  endExplain2.innerText = '登録サイト';
+  
+  
   divBottom.appendChild(hrTag);
   divBottom.appendChild(endExplain1);
+  divBottom.appendChild(endExplain2);
   return divBottom;
 }

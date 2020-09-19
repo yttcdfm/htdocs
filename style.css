@@ -46,4 +46,10 @@ hr{
 a.site-policy{
   width: 115px;
   margin: 10px;
+  float: left;
+}
+a.site-list{
+  width: 80px;
+  margin: 10px;
+  float: left;
 }
