@@ -30,15 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `access_view` (
   `id` int(11) NOT NULL,
+  `src_ip` varchar(50) DEFAULT NULL,
   `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- テーブルのデータのダンプ `access_view`
---
-
-INSERT INTO `access_view` (`id`, `post_time`) VALUES
-(1, '2020-09-19 07:48:23');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -58,7 +52,7 @@ ALTER TABLE `access_view`
 -- テーブルのAUTO_INCREMENT `access_view`
 --
 ALTER TABLE `access_view`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
