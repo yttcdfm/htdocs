@@ -18,7 +18,8 @@ div.contents-row{
   flex-direction: row;
 }
 div.content{
-  background-color: yellow;
+  box-shadow: 0 0 2px gray;
+  background-color: #fce2c4;
   display: flex;
   margin: 8px;
   width: 400px;
