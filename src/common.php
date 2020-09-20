@@ -98,7 +98,7 @@ function getPicture($result){
       $ans = array("id" => $value['id'], "site_name" => $value['site_name'], "title" => $value['title'], "content_url" => $value['content_url'], "pic_url" => $value['pic_url'], "duration" => $value['duration']);
       array_push($picture_array, $ans);
     }
-    
+    shuffle($picture_array);
     return $picture_json_array = json_encode($picture_array, JSON_UNESCAPED_UNICODE);
   }
 
