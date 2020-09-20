@@ -51,9 +51,10 @@ function select($table_name, $id_name, $id_value){
 }
 
 //POST
-function doPOST($table_name){
+function doPOST($table_name, $srcIp){
   global $pdo;
-  $result = $pdo->query('INSERT INTO '.$table_name.' (post_time) VALUES (CURRENT_TIMESTAMP);');
+  $sql = "INSERT INTO ".$table_name." (src_ip, post_time) VALUES ('".$srcIp."', CURRENT_TIMESTAMP);";
+  $result = $pdo->query($sql);
   $accessCount = $result->fetchColumn();
   if(!$result){
     //var_dump($result);
