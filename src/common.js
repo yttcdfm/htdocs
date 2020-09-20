@@ -235,7 +235,7 @@ function onClick_sitePolicy(){
 }
 
 function onClick_siteList(){
-  
+  open( "./site-link.html", "_blank") ;
 }
 
 function createBottom(){
