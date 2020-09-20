@@ -1,12 +1,31 @@
 body{
   background-color: #fce2c4;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+div.header{
+  margin-top: -5px;
+  position: 0px;
+  height: 90px;
+  width: 100%;
+  position: fixed;
+  background-color: rgb(247, 37, 154);
+}
+h1{
+  display: inline-block;
 }
 div.banner{
+  position: static;
   height: 265px;
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: rgb(247, 37, 154);
+  background-color: #FF9966;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  padding-top: 90px;
 }
 div.yoko{
   max-height: 200px;
@@ -50,6 +69,7 @@ a{
   overflow: hidden;
 }
 div.page-button-view{
+  margin: 10px;
 }
 div.page-button{
 }
