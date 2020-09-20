@@ -52,13 +52,15 @@ function select($table_name, $id_name, $id_value){
 
 //POST
 function doPOST($table_name, $srcIp){
-  global $pdo;
-  $sql = "INSERT INTO ".$table_name." (src_ip, post_time) VALUES ('".$srcIp."', CURRENT_TIMESTAMP);";
-  $result = $pdo->query($sql);
-  $accessCount = $result->fetchColumn();
-  if(!$result){
-    //var_dump($result);
-    die('クエリが失敗しました。'.pg_last_error());
+  if($srcIp != '127.0.0.1'){
+    global $pdo;
+    $sql = "INSERT INTO ".$table_name." (src_ip, post_time) VALUES ('".$srcIp."', CURRENT_TIMESTAMP);";
+    $result = $pdo->query($sql);
+    $accessCount = $result->fetchColumn();
+    if(!$result){
+      //var_dump($result);
+      die('クエリが失敗しました。'.pg_last_error());
+    }
   }
 }
 
