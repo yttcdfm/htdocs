@@ -1,4 +1,4 @@
-﻿/*****************************
+/*****************************
 * 関数定義部
 ******************************/
 function createImg(pic_url){
@@ -235,7 +235,11 @@ function onClick_sitePolicy(){
 }
 
 function onClick_siteList(){
-  open( "./site-link.html", "_blank") ;
+  open("./site-link.html", "_blank") ;
+}
+
+function onClick_contact(){
+  open("./contact.html", "_blank") ;
 }
 
 function createBottom(){
@@ -254,8 +258,14 @@ function createBottom(){
   endExplain2.innerText = '登録サイト';
   
   
+  var endExplain3 = document.createElement('a');
+  endExplain3.setAttribute('class', 'contact');
+  endExplain3.setAttribute('onclick', 'onClick_contact()');
+  endExplain3.innerText = 'お問い合わせ';
+  
   divBottom.appendChild(hrTag);
   divBottom.appendChild(endExplain1);
   divBottom.appendChild(endExplain2);
+  divBottom.appendChild(endExplain3);
   return divBottom;
 }

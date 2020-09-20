@@ -66,6 +66,11 @@ a.site-list{
   margin: 10px;
   float: left;
 }
+a.contact{
+  width: 100px;
+  margin: 10px;
+  float: left;
+}
 p.site-link{
   margin-bottom: 0px;
 }

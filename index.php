@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*****************************
 * 関数定義部
@@ -14,7 +14,7 @@ require_once('./src/common.php');
 connect_db();
 $result = selectAll('picture');
 $src_ip = $_SERVER["REMOTE_ADDR"];
-doPOST('access_view', $src_ip);
+doPostSrcip('access_view', $src_ip);
 $pdo = null;
 
 $picture_json_array = getPicture($result);
