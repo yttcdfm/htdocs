@@ -52,7 +52,7 @@ function select($table_name, $id_name, $id_value){
 
 //POST
 function doPOST($table_name, $srcIp){
-  if($srcIp != '127.0.0.1'){
+  if(($srcIp != '127.0.0.1') || ($srcIp != '106.181.106.192')){
     global $pdo;
     $sql = "INSERT INTO ".$table_name." (src_ip, post_time) VALUES ('".$srcIp."', CURRENT_TIMESTAMP);";
     $result = $pdo->query($sql);
