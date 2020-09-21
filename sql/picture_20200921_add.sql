@@ -1,0 +1,1 @@
+ALTER TABLE `picture` ADD `category_id` INT NOT NULL AFTER `id`;

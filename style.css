@@ -16,6 +16,7 @@ div.header{
 h1{
   padding-left: 5px;
   display: inline-block;
+  position: absolute;
 }
 div.banner{
   position: static;
@@ -43,7 +44,7 @@ div.content{
   display: flex;
   margin: 8px;
   width: 400px;
-  height: 120px;
+  height: 130px;
 }
 div.img{
   width: 147px;
@@ -97,7 +98,7 @@ p.site-link{
 }
 #form2{
   display: inline-block;
-  position: fixed;
+  position: absolute;
   width: 230px;
   height: 48px;
   margin: -5px;
@@ -105,6 +106,7 @@ p.site-link{
   margin-block-start: 21.440px;
   margin-block-end: 21.440px;
   margin-right: 80px;
+  left: 500px;
 }
 #sbox2{
   height: 100%;
@@ -133,4 +135,13 @@ p.site-link{
 }
 #sbtn5:hover{
   color: #7fbfff;
+}
+button.category{
+  position: absolute;
+}
+div.category{
+  position: relative;
+  left: 860px;
+  width: auto;
+  margin: 10px;
 }

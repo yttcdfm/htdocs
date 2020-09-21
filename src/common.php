@@ -97,11 +97,43 @@ function getPicture($result){
     
     foreach($result as $value){
       //var_dump($value);
-      $ans = array("id" => $value['id'], "site_name" => $value['site_name'], "title" => $value['title'], "content_url" => $value['content_url'], "pic_url" => $value['pic_url'], "duration" => $value['duration']);
+      $ans = array("id" => $value['id'], "category_id" => $value['category_id'], "site_name" => $value['site_name'], "title" => $value['title'], "content_url" => $value['content_url'], "pic_url" => $value['pic_url'], "duration" => $value['duration']);
       array_push($picture_array, $ans);
     }
     shuffle($picture_array);
     return $picture_json_array = json_encode($picture_array, JSON_UNESCAPED_UNICODE);
+  }
+
+}
+
+function getCategory($result){
+  if(!empty($result)){
+    
+    $array = array();
+    
+    foreach($result as $value){
+      //var_dump($value);
+      $ans = array("id" => $value['id'], "name" => $value['name'], "post_time" => $value['post_time']);
+      array_push($array, $ans);
+    }
+    shuffle($array);
+    return $category_json_array = json_encode($array, JSON_UNESCAPED_UNICODE);
+  }
+}
+
+function getContent($result){
+
+  if(!empty($result)){
+    
+    $array = array();
+    
+    foreach($result as $value){
+      //var_dump($value);
+      $ans = array("id" => $value['id'], "name" => $value['name'], "post_time" => $value['post_time']);
+      array_push($array, $ans);
+    }
+    shuffle($array);
+    return $json_array = json_encode($array, JSON_UNESCAPED_UNICODE);
   }
 
 }

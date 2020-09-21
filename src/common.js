@@ -25,6 +25,11 @@ function createA(picJ){
   return a;
 }
 
+function getCategoryId(picJ){
+  var category_id = picJ.category_id;
+  return category_id;
+}
+
 function createP(text){
   var p = document.createElement('p');
   p.setAttribute('class', 'content');
@@ -32,42 +37,48 @@ function createP(text){
   return p;
 }
 
-function createContentExplain(picJ){
+function createContentExplain(category_array, picJ){
   var contentExplain = document.createElement('div');
   contentExplain.setAttribute('class', 'content-explain');
   
   var a = createA(picJ);
-  var p1 = createP('　');
+  contentExplain.appendChild(a);
+  
+  if((picJ.category_id == undefined) || (picJ.category_id == null) || (picJ.category_id == '0')){
+  }else{
+    var categoryId = picJ.category_id;
+    var categoryTag = createCategoryTag(category_array, categoryId);
+    contentExplain.appendChild(categoryTag);
+  }
+  
   var p2 = createP('掲載元　：' + picJ.site_name);
   var p3 = createP('再生時間：' + picJ.duration);
   
-  contentExplain.appendChild(a);
-  contentExplain.appendChild(p1);
   contentExplain.appendChild(p2);
   contentExplain.appendChild(p3);
 
   return contentExplain;
 }
 
-function createContentTag(picJ){
+function createContentTag(categoryJ, picJ){
   var content = document.createElement('div');
   content.setAttribute('class', 'content');
 
   var divImg = createDivImg(picJ.pic_url);
   content.appendChild(divImg);
   
-  var contentExplain = createContentExplain(picJ);
+  var contentExplain = createContentExplain(categoryJ, picJ);
   content.appendChild(contentExplain);
 
   return content;
 }
 
-function createContentsRowTag(picJ){
+function createContentsRowTag(categoryJ, picJ){
   var contentsRow = document.createElement('div');
   contentsRow.setAttribute('class','contents-row');
 
   for(var i in picJ){
-    var content = createContentTag(picJ[i]);
+    var content = createContentTag(categoryJ, picJ[i]);
     contentsRow.appendChild(content);
   }
   
@@ -81,7 +92,7 @@ function _delete_child_element(id_name){
   }
 }
 
-function createContentsPane(pictureJson, pageIndex){
+function createContentsPane(categoryJson, pictureJson, pageIndex){
   var contents = document.createElement('div');
   contents.setAttribute('class','contents');
 
@@ -104,19 +115,19 @@ function createContentsPane(pictureJson, pageIndex){
        break;
     }
     if((i > contentsStartIndex) && ((i % 3) == 0)){
-      contents.appendChild(createContentsRowTag(array));
+      contents.appendChild(createContentsRowTag(categoryJson, array));
       array = [];
     }
     array.push(pictureJson[i]);
   }
 
-  contents.appendChild(createContentsRowTag(array));
+  contents.appendChild(createContentsRowTag(categoryJson, array));
   return contents;
 }
 
 function onClick_pageButton(pageIndex){
   var divContents = document.getElementsByClassName('contents');
-  var contentsPane = createContentsPane(pictureJson, pageIndex);
+  var contentsPane = createContentsPane(categoryJson, pictureJson, pageIndex);
   divContents[0].innerHTML = contentsPane.innerHTML;
 }
 
@@ -149,6 +160,21 @@ function onClick_pageButtonPrevious(previousId, totalPageSize){
   }
 }
 
+function updatePage(data){
+  pictureJson = JSON.parse(data);
+  var divSearchResult = document.getElementsByClassName('search-result');
+  var resultPTag = createDivSearchResult(pictureJson.length);
+  divSearchResult.item(0).innerHTML = resultPTag.innerHTML;
+    
+  var divContents = document.getElementsByClassName('contents');
+  var contentsPane = createContentsPane(categoryJson, pictureJson, 1);
+  divContents.item(0).innerHTML = contentsPane.innerHTML;
+    
+  var divPageButtonView = document.getElementsByClassName('page-button-view'); 
+  var pageButtonViewContents = createDivPageButtonView(pictureJson, pictureJson.length);
+  divPageButtonView.item(0).innerHTML = pageButtonViewContents.innerHTML;
+}
+
 function onClick_wordSearchButton(){
   var inputTag = document.getElementById('sbox2');
   var hoge = inputTag.value;
@@ -156,36 +182,19 @@ function onClick_wordSearchButton(){
   if(hoge == ''){
   }else{
     $.ajax({	
-	url: "./src/word-search.php", // 通信先のURL
+	url: "./src/post-receiver.php", // 通信先のURL
 	type: "POST",		// 使用するHTTPメソッド
 	data: {'word': hoge},
 	dataType: "text", // 応答のデータの種類 
     
-    }).done(function(data) {
-      pictureJson = JSON.parse(data);
-      var divSearchResult = document.getElementsByClassName('search-result');
-      var resultPTag = createDivSearchResult(pictureJson.length);
-      divSearchResult.item(0).innerHTML = resultPTag.innerHTML;
-    
-      var divContents = document.getElementsByClassName('contents');
-      console.log(pictureJson);
-      var contentsPane = createContentsPane(pictureJson, 1);
-      console.log(contentsPane);
-      divContents.item(0).innerHTML = contentsPane.innerHTML;
-    
-      //var divPageButtonViewOld = document.getElementsByClassName('page-button-view'); 
-      var divPageButtonView = document.getElementsByClassName('page-button-view'); 
-      var pageButtonViewContents = createDivPageButtonView(pictureJson, pictureJson.length);
-      divPageButtonView.item(0).innerHTML = pageButtonViewContents.innerHTML;
-      console.log(divPageButtonView.item(0).innerHTML);
-//      var divPageButtonView = divPageButtonViewTmp.item(0);
-//      divPageButtonView.innerHTML = pageButtonViewContents.innerHTML;
-      //alert('成功');
-    }).fail(function() {
-      //alert('失敗');
-    }).always(function(){
-      inputTag.value = '';
-    }); 
+  }).done(function(data) {
+    updatePage(data);
+    //alert('成功');
+  }).fail(function() {
+    //alert('失敗');
+  }).always(function(){
+    inputTag.value = '';
+  });
   }
 }
 
@@ -222,6 +231,50 @@ function createSearchForm(){
   searchForm.appendChild(wordSearchButton);
   
   header.item(0).appendChild(searchForm);
+}
+
+function onClick_categoryTag(category_id){
+  if((category_id === undefined) || (category_id == '') || (category_id === null)){
+     
+  }else{
+    $.ajax({	
+      url: "./src/post-receiver.php", // 通信先のURL
+      type: "POST",		// 使用するHTTPメソッド
+      data: {'category_id': category_id},
+      dataType: "text", // 応答のデータの種類 
+    
+    }).done(function(data) {
+      updatePage(data);
+      //alert('成功');
+    }).fail(function() {
+      //alert('失敗');
+    }).always(function(){
+    });  
+  }
+  
+}
+
+function createCategoryTag(category_array, category_id){
+  if((category_id === undefined) || (category_id === null) || (category_id == 0)){
+     
+  }else{
+    var categoryTag = document.createElement('button');
+    categoryTag.setAttribute('data-category', category_id);
+    categoryTag.setAttribute('class', 'content-category');
+    
+    //指定したカテゴリIDの名前を取り出す
+    var category_name = '';
+    for(var i in category_array){
+      if(category_array[i].id == category_id){
+         category_name = category_array[i].name;
+      }
+    }
+    
+    categoryTag.innerText = category_name;
+    categoryTag.setAttribute('onclick', 'onClick_categoryTag(' + category_id + ')');
+    return categoryTag;
+  }
+
 }
 
 function createPageButtonNext(nextId, totalPageSize){
