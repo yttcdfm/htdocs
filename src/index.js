@@ -16,8 +16,13 @@ var divSearchResult = createDivSearchResult(pictureJson.length);
 var headerContents = document.getElementsByClassName('header');
 var divCategory = document.createElement('div');
 divCategory.setAttribute('class', 'category');
-var categoryTag = createCategoryTag(categoryJson, 1);
-divCategory.appendChild(categoryTag);
+
+for(var i in categoryJson){
+  var categoryTag = createCategoryTag(categoryJson, categoryJson[i].id);
+  categoryTag.setAttribute('class', 'category');
+  divCategory.appendChild(categoryTag);
+}
+
 headerContents.item(0).appendChild(divCategory);
 
 body.appendChild(divSearchResult);

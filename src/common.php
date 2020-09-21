@@ -116,7 +116,6 @@ function getCategory($result){
       $ans = array("id" => $value['id'], "name" => $value['name'], "post_time" => $value['post_time']);
       array_push($array, $ans);
     }
-    shuffle($array);
     return $category_json_array = json_encode($array, JSON_UNESCAPED_UNICODE);
   }
 }

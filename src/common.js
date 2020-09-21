@@ -48,6 +48,7 @@ function createContentExplain(category_array, picJ){
   }else{
     var categoryId = picJ.category_id;
     var categoryTag = createCategoryTag(category_array, categoryId);
+    categoryTag.setAttribute('class', 'content-category');
     contentExplain.appendChild(categoryTag);
   }
   
@@ -260,7 +261,6 @@ function createCategoryTag(category_array, category_id){
   }else{
     var categoryTag = document.createElement('button');
     categoryTag.setAttribute('data-category', category_id);
-    categoryTag.setAttribute('class', 'content-category');
     
     //指定したカテゴリIDの名前を取り出す
     var category_name = '';

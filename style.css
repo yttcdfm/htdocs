@@ -140,8 +140,14 @@ button.category{
   position: absolute;
 }
 div.category{
-  position: relative;
+  position: absolute;
   left: 860px;
   width: auto;
   margin: 10px;
+}
+button.category{
+  margin: 2px;
+  position: relative;
+}
+button.content-category{
 }
