@@ -140,7 +140,7 @@ button.category{
   position: absolute;
 }
 div.category{
-  position: absolute;
+  position: relative;
   left: 860px;
   width: auto;
   margin: 10px;
