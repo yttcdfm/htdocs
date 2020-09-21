@@ -53,6 +53,7 @@ function select($table_name, $id_name, $id_value){
 
 //POST
 function doPostSrcip($table_name, $srcIp){
+  global $admin_ip;
   if(($srcIp == '127.0.0.1') || ($srcIp == $admin_ip)){
   }else{
     global $pdo;
