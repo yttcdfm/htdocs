@@ -91,11 +91,11 @@ function createContentsPane(pictureJson, pageIndex){
   var contentsEndIndex = pageIndex * 30;
 
   //リンクコンテンツ生成
-  if(pictureJson.length > contentsEndIndex){
+  if(displaySize > contentsEndIndex){
     displaiSize = contentsEndIndex;
   }
   
-  if(pictureJson.length < contentsEndIndex){
+  if(displaySize < contentsEndIndex){
      
   }
 
@@ -111,11 +111,7 @@ function createContentsPane(pictureJson, pageIndex){
   }
 
   contents.appendChild(createContentsRowTag(array));
-  array = [];
-
   return contents;
-//  var body = document.getElementById('hogehoge');
-//  body.appendChild(contents);
 }
 
 function onClick_pageButton(pageIndex){
@@ -151,6 +147,81 @@ function onClick_pageButtonPrevious(previousId, totalPageSize){
     var oldDivPageButton = document.getElementsByClassName('page-button');
     oldDivPageButton.item(0).innerHTML = divPageButton.innerHTML;
   }
+}
+
+function onClick_wordSearchButton(){
+  var inputTag = document.getElementById('sbox2');
+  var hoge = inputTag.value;
+  
+  if(hoge == ''){
+  }else{
+    $.ajax({	
+	url: "./src/word-search.php", // 通信先のURL
+	type: "POST",		// 使用するHTTPメソッド
+	data: {'word': hoge},
+	dataType: "text", // 応答のデータの種類 
+    
+    }).done(function(data) {
+      pictureJson = JSON.parse(data);
+      var divSearchResult = document.getElementsByClassName('search-result');
+      var resultPTag = createDivSearchResult(pictureJson.length);
+      divSearchResult.item(0).innerHTML = resultPTag.innerHTML;
+    
+      var divContents = document.getElementsByClassName('contents');
+      console.log(pictureJson);
+      var contentsPane = createContentsPane(pictureJson, 1);
+      console.log(contentsPane);
+      divContents.item(0).innerHTML = contentsPane.innerHTML;
+    
+      //var divPageButtonViewOld = document.getElementsByClassName('page-button-view'); 
+      var divPageButtonView = document.getElementsByClassName('page-button-view'); 
+      var pageButtonViewContents = createDivPageButtonView(pictureJson, pictureJson.length);
+      divPageButtonView.item(0).innerHTML = pageButtonViewContents.innerHTML;
+      console.log(divPageButtonView.item(0).innerHTML);
+//      var divPageButtonView = divPageButtonViewTmp.item(0);
+//      divPageButtonView.innerHTML = pageButtonViewContents.innerHTML;
+      //alert('成功');
+    }).fail(function() {
+      //alert('失敗');
+    }).always(function(){
+      inputTag.value = '';
+    }); 
+  }
+}
+
+function createSearchForm(){
+  var header = document.getElementsByClassName('header');
+  
+  var searchForm = document.createElement('form');
+  searchForm.setAttribute('id', 'form2');
+  //searchForm.setAttribute('onsubmit', "onClick_wordSearchButton(); return; false;");
+  
+  var inputWordTag = document.createElement('input');
+  inputWordTag.setAttribute('id', 'sbox2');
+  inputWordTag.setAttribute('name', 'word');
+  inputWordTag.setAttribute('type', 'text');
+  inputWordTag.setAttribute('placeholder', 'フリーワードを入力');
+  //inputWordTag.setAttribute('onsubmit', "onClick_wordSearchButton(); return; false;");
+  
+  var inputDummyTag = document.createElement('input');
+  inputDummyTag.setAttribute('type', 'text');
+  inputDummyTag.setAttribute('name', 'dummy');
+  inputDummyTag.setAttribute('style', 'display: none;');
+  
+  var wordSearchButton = document.createElement('button');
+  wordSearchButton.setAttribute('type', 'button');
+  wordSearchButton.setAttribute('id', 'sbtn2');
+  wordSearchButton.setAttribute('onclick', "onClick_wordSearchButton(); return; false;");
+  
+  var i = document.createElement('i');
+  i.setAttribute('class', 'fas fa-search');
+  wordSearchButton.appendChild(i);
+  
+  searchForm.appendChild(inputWordTag);
+  searchForm.appendChild(inputDummyTag);
+  searchForm.appendChild(wordSearchButton);
+  
+  header.item(0).appendChild(searchForm);
 }
 
 function createPageButtonNext(nextId, totalPageSize){
@@ -200,27 +271,28 @@ function createDivPageButton(totalPageSize, startId){
     divPageButton.appendChild(pageButtonNext);
   }else if(totalPageSize >= startId){
   //5ページまでの場合
-    for(var i = startId; i <= (startId + 4); i++){
-      for(var i = startId; i <= totalPageSize; i++){
-        var pageButton = createPageButton(i);
-        divPageButton.appendChild(pageButton);
-      }
+    for(var i = startId; i <= totalPageSize; i++){
+      var pageButton = createPageButton(i);
+      divPageButton.appendChild(pageButton);
     }
   }
   return divPageButton;
 }
 
-function createDivPageButtonView(resultColSize){
+function createDivSearchResult(resultColSize){
+  var resultPTag = document.createElement('p');
+  resultPTag.setAttribute('class', 'search-result');
+  resultPTag.innerText = resultColSize + '件の動画が見つかりました';
+  return resultPTag;
+}
+
+function createDivPageButtonView(pictureJson, resultColSize){
   var divPageButtonView = document.createElement('div');
   divPageButtonView.setAttribute('class', 'page-button-view');
-
-  var resultPTag = document.createElement('p');
-  resultPTag.innerText = resultColSize + '件の動画が見つかりました'; 
 
   var totalPageSize = Math.ceil(resultColSize / 30);
   var divPageButton = createDivPageButton(totalPageSize, 1);
 
-  divPageButtonView.appendChild(resultPTag);
   divPageButtonView.appendChild(divPageButton);
   return divPageButtonView;
 }

@@ -3,9 +3,10 @@
 require_once('config.php');
 
 /******************
-* 関数定義部（後で別ファイルに分けたい）
+* 関数定義部
 *******************/
 $db_password;
+$admin_ip;
 $pdo;
 
 //DB接続
@@ -52,7 +53,7 @@ function select($table_name, $id_name, $id_value){
 
 //POST
 function doPostSrcip($table_name, $srcIp){
-  if(($srcIp == '127.0.0.1') || ($srcIp == '106.181.106.192')){
+  if(($srcIp == '127.0.0.1') || ($srcIp == $admin_ip)){
   }else{
     global $pdo;
     $sql = "INSERT INTO ".$table_name." (src_ip, post_time) VALUES ('".$srcIp."', CURRENT_TIMESTAMP);";

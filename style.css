@@ -95,3 +95,42 @@ a.contact{
 p.site-link{
   margin-bottom: 0px;
 }
+#form2{
+  display: inline-block;
+  position: fixed;
+  width: 230px;
+  height: 48px;
+  margin: -5px;
+  margin-left: 50px;
+  margin-block-start: 21.440px;
+  margin-block-end: 21.440px;
+  margin-right: 80px;
+}
+#sbox2{
+  height: 100%;
+  width: 100%;
+  padding-top: 0px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  padding-left: 10px;
+  position: absolute; 
+  left: 0;
+  top: 0; 
+  border-radius: 2px;
+  outline: 0;
+  background: #eee;
+  margin-top: 0px;
+  padding-right: 48px;
+}
+#sbtn2{
+  height: 100%;
+  position: absolute; 
+  left: 258px;/*アイコン左右の位置調整*/
+  background: none;
+  color: #666;
+  border: none;
+  font-size: 20px;/*アイコンサイズ*/
+}
+#sbtn5:hover{
+  color: #7fbfff;
+}
