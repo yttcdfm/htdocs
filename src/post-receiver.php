@@ -15,7 +15,7 @@ function doPostWordSearch($word){
 
 function doPostCategoryTagSearch($category_id){
   global $pdo;
-  $sql = "SELECT * FROM picture WHERE category_id = ".$category_id;
+  $sql = "SELECT * FROM picture WHERE category_id1 = ".$category_id." OR category_id2 = ".$category_id;
   $result = $pdo->query($sql);
   if(!$result){
     //var_dump($result);

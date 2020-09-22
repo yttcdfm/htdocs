@@ -35,3 +35,5 @@ body.appendChild(divPageButtonView);
 var bottom = createBottom();
 
 body.appendChild(bottom);
+
+createModalContent();

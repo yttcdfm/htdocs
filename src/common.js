@@ -26,7 +26,7 @@ function createA(picJ){
 }
 
 function getCategoryId(picJ){
-  var category_id = picJ.category_id;
+  var category_id = picJ.category_id1;
   return category_id;
 }
 
@@ -44,12 +44,23 @@ function createContentExplain(category_array, picJ){
   var a = createA(picJ);
   contentExplain.appendChild(a);
   
-  if((picJ.category_id == undefined) || (picJ.category_id == null) || (picJ.category_id == '0')){
-  }else{
-    var categoryId = picJ.category_id;
-    var categoryTag = createCategoryTag(category_array, categoryId);
-    categoryTag.setAttribute('class', 'content-category');
-    contentExplain.appendChild(categoryTag);
+//  var categoryEditTag = document.createElement('button');
+//  categoryEditTag.setAttribute('class', 'category-edit');
+//  categoryEditTag.innerText = 'タグ編集';  
+  var cate_array = [];
+  cate_array.push(picJ.category_id1);
+  cate_array.push(picJ.category_id2);
+//  categoryEditTag.setAttribute('onclick', 'onClick_categoryEditButton(' + cate_array[0] + ', ' + cate_array[1] + '); return; false;');
+//  contentExplain.appendChild(categoryEditTag);
+  
+  for(var i in cate_array){
+    if((cate_array[i] == undefined) || (cate_array[i] == null) || (cate_array[i] == '0')){
+    }else{
+      var categoryId = cate_array[i];
+      var categoryTag = createCategoryTag(category_array, categoryId);
+      categoryTag.setAttribute('class', 'content-category');
+      contentExplain.appendChild(categoryTag);
+    }
   }
   
   var p2 = createP('掲載元　：' + picJ.site_name);
@@ -124,6 +135,141 @@ function createContentsPane(categoryJson, pictureJson, pageIndex){
 
   contents.appendChild(createContentsRowTag(categoryJson, array));
   return contents;
+}
+
+function centeringModalSyncer(){
+
+	//画面(ウィンドウ)の幅を取得し、変数[w]に格納
+	var w = $(window).width();
+
+	//画面(ウィンドウ)の高さを取得し、変数[h]に格納
+	var h = $(window).height();
+
+	//コンテンツ(#modal-content)の幅を取得し、変数[cw]に格納
+	var cw = $('#modal-content').outerWidth(true);
+
+	//コンテンツ(#modal-content)の高さを取得し、変数[ch]に格納
+	var ch = $('#modal-content').outerHeight(true);
+
+	//コンテンツ(#modal-content)を真ん中に配置するのに、左端から何ピクセル離せばいいか？を計算して、変数[pxleft]に格納
+	var pxleft = ((w - cw)/2);
+
+	//コンテンツ(#modal-content)を真ん中に配置するのに、上部から何ピクセル離せばいいか？を計算して、変数[pxtop]に格納
+	var pxtop = ((h - ch)/2);
+
+	//[#modal-content]のCSSに[left]の値(pxleft)を設定
+	$("#modal-content").css({"left": pxleft + "px"});
+
+	//[#modal-content]のCSSに[top]の値(pxtop)を設定
+	$("#modal-content").css({"top": pxtop + "px"});
+
+    return cw;
+}
+
+function createDivRegCategoryLeft(category_id1, category_id2, cw){
+  var divRegCategoryLeft = document.getElementsByClassName('reg-category-left');
+  $('.reg-category-left').css({"margin-right": cw/3 + "px"});
+  var category_name = '';
+  var cja = categoryJson;
+  var cate_array = [];
+  cate_array.push(category_id1);
+  cate_array.push(category_id2);
+  
+  for(var i in cate_array){
+    for(var j in cja){
+      if(cja[j].id == cate_array[i]){
+         category_name = cja[j].name;
+      }
+    }
+    var regCategoryLabel = document.createElement('label');
+    regCategoryLabel.setAttribute('class', 'category');
+    regCategoryLabel.innerText = category_name;
+    divRegCategoryLeft.item(0).appendChild(regCategoryLabel);
+    category_name = null;
+  }
+  
+  return divRegCategoryLeft;
+}
+
+function onClick_label(){
+}
+
+function createDivRegCategoryRight(category_array){
+  var divRegCategoryRight = document.getElementsByClassName('reg-category-right');
+  var category_name = '';
+  
+  for(var i in category_array){
+    var regCategoryLabel = document.createElement('label');
+    regCategoryLabel.setAttribute('class', 'category');
+    regCategoryLabel.setAttribute('data-right-cate-id', category_array[i].id);
+    regCategoryLabel.setAttribute('onclick', 'onClick_label(); return false;')
+    regCategoryLabel.innerText = category_array[i].name;
+    divRegCategoryRight.item(0).appendChild(regCategoryLabel);
+    category_name = null; 
+  }
+  
+  return divRegCategoryRight;
+}
+
+function onClick_categoryEditButton(category_id1, category_id2){
+  $(this).blur;
+  if($('#modal-overlay')[0]) return false;
+  $("body").append('<div id="modal-overlay"></div>');
+  $('#modal-overlay').fadeIn('slow');
+  
+  var cw = centeringModalSyncer();
+  
+  //タグ編集画面(左：現在の設定)を作る
+  var divRegCategoryLeft = createDivRegCategoryLeft(category_id1, category_id2, cw);
+  
+  //タグ編集画面(右：カテゴリ一覧)を作る
+  var divRegCategoryRight = createDivRegCategoryRight(categoryJson);
+
+  $('#modal-content').fadeIn('slow');
+  
+  $('#modal-overlay,#modal-close').unbind().click(function(){
+    $('modal-content,#modal-overlay').fadeOut("slow", function(){
+      $("#modal-content").css({"display": "none"});
+      $('#modal-overlay').remove();
+      divRegCategoryLeft.item(0).innerHTML = null;
+      divRegCategoryRight.item(0).innerHTML = null;
+    });
+  });
+}
+
+function createModalContent(){
+  var categoryEditPane = document.createElement('div');
+  categoryEditPane.setAttribute('id', 'modal-content');
+  
+  var divRegCategory = document.createElement('div');
+  divRegCategory.setAttribute('class', 'reg-category');
+  var divRegCategoryLeft = document.createElement('div');
+  divRegCategoryLeft.setAttribute('class', 'reg-category-left');
+  var divRegCategoryRight = document.createElement('div');
+  divRegCategoryRight.setAttribute('class', 'reg-category-right');
+  
+  divRegCategory.append(divRegCategoryLeft);
+  divRegCategory.append(divRegCategoryRight);
+  categoryEditPane.appendChild(divRegCategory);
+  
+  var p = document.createElement('p');
+  var execA = document.createElement('a');
+  execA.setAttribute('id', 'modal-close');
+  execA.setAttribute('class', 'button-link');
+  execA.innerText = '更新';
+  
+  var closeA = document.createElement('a');
+  closeA.setAttribute('id', 'modal-close');
+  closeA.setAttribute('class', 'button-link');
+  closeA.innerText = '閉じる';
+  
+  p.appendChild(execA);
+  p.appendChild(closeA);
+  
+  categoryEditPane.appendChild(p);
+  
+  var body = document.getElementsByTagName('body');
+  body.item(0).appendChild(categoryEditPane);
 }
 
 function onClick_pageButton(pageIndex){
