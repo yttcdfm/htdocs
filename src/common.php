@@ -93,14 +93,14 @@ function getPicture($result){
 
   if(!empty($result)){
     
-    $picture_array = array();
+    $picture_array_tmp = array();
     
     foreach($result as $value){
       //var_dump($value);
       $ans = array("id" => $value['id'], "category_id1" => $value['category_id1'], "category_id2" => $value['category_id2'], "site_name" => $value['site_name'], "title" => $value['title'], "content_url" => $value['content_url'], "pic_url" => $value['pic_url'], "duration" => $value['duration']);
-      array_push($picture_array, $ans);
+      array_push($picture_array_tmp, $ans);
     }
-    shuffle($picture_array);
+    $picture_array = array_reverse($picture_array_tmp);
     return $picture_json_array = json_encode($picture_array, JSON_UNESCAPED_UNICODE);
   }
 
@@ -131,7 +131,7 @@ function getContent($result){
       $ans = array("id" => $value['id'], "name" => $value['name'], "post_time" => $value['post_time']);
       array_push($array, $ans);
     }
-    shuffle($array);
+    array_push($array);
     return $json_array = json_encode($array, JSON_UNESCAPED_UNICODE);
   }
 

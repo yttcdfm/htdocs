@@ -18,6 +18,13 @@ h1{
   display: inline-block;
   position: absolute;
 }
+h1.another{
+  padding-left: 5px;
+  position: static;
+}
+h2{
+  position: static;
+}
 div.banner{
   position: static;
   height: 265px;
