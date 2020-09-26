@@ -97,7 +97,7 @@ function getPicture($result){
     
     foreach($result as $value){
       //var_dump($value);
-      $ans = array("id" => $value['id'], "category_id1" => $value['category_id1'], "category_id2" => $value['category_id2'], "site_name" => $value['site_name'], "title" => $value['title'], "content_url" => $value['content_url'], "pic_url" => $value['pic_url'], "duration" => $value['duration']);
+      $ans = array("id" => $value['id'], "category_id1" => $value['category_id1'], "category_id2" => $value['category_id2'], "category_id3" => $value['category_id3'], "site_name" => $value['site_name'], "title" => $value['title'], "content_url" => $value['content_url'], "pic_url" => $value['pic_url'], "duration" => $value['duration']);
       array_push($picture_array_tmp, $ans);
     }
     $picture_array = array_reverse($picture_array_tmp);

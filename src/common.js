@@ -50,6 +50,7 @@ function createContentExplain(category_array, picJ){
   var cate_array = [];
   cate_array.push(picJ.category_id1);
   cate_array.push(picJ.category_id2);
+  cate_array.push(picJ.category_id3);
 //  categoryEditTag.setAttribute('onclick', 'onClick_categoryEditButton(' + cate_array[0] + ', ' + cate_array[1] + '); return; false;');
 //  contentExplain.appendChild(categoryEditTag);
   
