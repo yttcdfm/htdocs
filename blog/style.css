@@ -15,6 +15,7 @@ h1{
 }
 ul{
   margin-top: 0px;
+  margin-bottom: 0px;
   padding-top: 10px;
   padding-bottom: 10px;
   background: #FFCCCC;
@@ -43,4 +44,17 @@ div.event_content{
 }
 a.movie_link{
   display: inline-block;
+}
+div.banner{
+  position: static;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #FF9966;
+}
+div.yoko{
+  max-height: 200px;
+  width: auto;
+  margin: 5px;
 }
