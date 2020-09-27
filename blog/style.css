@@ -5,6 +5,29 @@ body{
   width: 100%;
   height: 100%;
 }
+h1{
+  padding-top: 0.67em;
+  padding-bottom: 0.67em;
+  padding-left: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background: rgb(247, 37, 154);
+}
+ul{
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #FFCCCC;
+  padding-inline-start: 10px;
+}
+li{
+  background: #FFCCCC;
+  list-style: none;
+  box-shadow: 0 0 4px rgb(247, 37, 154);
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 div.content{
   box-shadow: 0 0 2px gray;
   background-color: #FFCCCC;
