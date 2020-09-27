@@ -20,6 +20,7 @@ require_once('../src/common.php');
 //
 //$picture_json_array = getPicture($result);
 //$category_json_array = getCategory($result2);
+require_once('index.html');
 ?>
 
 <script type="text/javascript">
