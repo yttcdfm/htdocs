@@ -36,6 +36,6 @@ for(var i in unitJson){
   contents[0].appendChild(unitTag);
 }
 
-//var divBotton = createBottom();
-//var body = document.getElementsByTagName('body');
-//body[0].appendChild(divBotton);
+var divBotton = createBottom();
+var body = document.getElementsByTagName('body');
+body[0].appendChild(divBotton);

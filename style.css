@@ -27,13 +27,14 @@ h2{
 }
 div.banner{
   position: static;
-  height: 200px;
+  height: 265px;
   width: 100%;
   display: flex;
   flex-direction: row;
   background-color: #FF9966;
   margin-top: 0px;
   margin-bottom: 5px;
+  padding-top: 90px;
 }
 div.yoko{
   max-height: 200px;
