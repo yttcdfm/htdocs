@@ -62,6 +62,12 @@ p.event{
   margin-top: 1px;
   margin-bottom: 1px;
 }
+a.site-policy{
+  margin: 10px;
+}
+a.site-list{
+  margin: 10px;
+}
 a.contact{
   margin: 10px;
 }
