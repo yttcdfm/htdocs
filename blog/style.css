@@ -29,6 +29,14 @@ li{
   padding-left: 10px;
   padding-right: 10px;
 }
+div.contents{
+  display: inline-block;
+}
+div.tate-banner{
+  position: fixed;
+  top: 0px;
+  left: calc(100% - 160px);
+}
 div.content{
   box-shadow: 0 0 4px gray;
   background-color: #fce2c4;
