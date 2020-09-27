@@ -541,3 +541,7 @@ function createBottom(){
   divBottom.appendChild(endExplain3);
   return divBottom;
 }
+
+function onClick_eventMenu(){
+  alert('hogehoge');
+}

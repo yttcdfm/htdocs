@@ -36,7 +36,11 @@ div.content{
   margin: 10px;
   vertical-align: top;
   display: inline-block;
+  padding: 5px;
 }
 div.event_content{
   margin: 30px;
+}
+a.movie_link{
+  display: inline-block;
 }
