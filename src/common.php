@@ -54,7 +54,7 @@ function select($table_name, $id_name, $id_value){
 //POST
 function doPostSrcip($table_name, $srcIp){
   global $admin_ip;
-  if(($srcIp == '127.0.0.1') || ($srcIp == $admin_ip)){
+  if((gethostname() == 'MyComputer') || ($srcIp == '127.0.0.1') || ($srcIp == $admin_ip)){
   }else{
     global $pdo;
     $sql = "INSERT INTO ".$table_name." (src_ip, post_time) VALUES ('".$srcIp."', CURRENT_TIMESTAMP);";
