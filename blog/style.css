@@ -58,3 +58,7 @@ div.yoko{
   width: auto;
   margin: 5px;
 }
+p.event{
+  margin-top: 1px;
+  margin-bottom: 1px;
+}

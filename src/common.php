@@ -137,6 +137,23 @@ function getContent($result){
 
 }
 
+function getEvent($result){
+
+  if(!empty($result)){
+    
+    $array = array();
+    
+    foreach($result as $value){
+      //var_dump($value);
+      $ans = array("id" => $value['id'], "name" => $value['name'], "location" => $value['location'], "date" => $value['date'], "detail" => $value['detail'], "post_time" => $value['post_time']);
+      array_push($array, $ans);
+    }
+    array_push($array);
+    return $json_array = json_encode($array, JSON_UNESCAPED_UNICODE);
+  }
+
+}
+
 //レコード数取得
 function getRecordCount($table_name){
   global $pdo;
