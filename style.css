@@ -46,6 +46,9 @@ div.yoko2{
   width: auto;
   margin: 5px;
 }
+div.yoko3{
+  display: none;
+}
 div.contents-row{
   display: flex;
   flex-direction: row;
@@ -255,8 +258,16 @@ div.reg-category-right{
   div.banner{
     padding-top: 0px;
   }
+  div.yoko{
+    display: none;
+  }
   div.yoko2{
     display: none;
+  }
+  div.yoko3{
+    display: block;
+    width: 100%;
+    height: auto;
   }
   div.contents-row{
     display: block;
