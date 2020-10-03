@@ -278,12 +278,17 @@ div.reg-category-right{
     margin-bottom: 8px;
     margin-left: 0px;
     margin-right: 0px;
+    height: 140px;
   }
   div.img{
     width: 33%;
   }
   div.content-explain{
     width: 67%;
+  }
+  p.content{
+    margin: 2px;
+    font-size: 12px
   }
   button.page-button{
   width: 14%;
