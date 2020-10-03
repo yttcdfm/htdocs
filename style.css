@@ -285,4 +285,7 @@ div.reg-category-right{
   div.content-explain{
     width: 67%;
   }
+  button.page-button{
+  width: 14%;
+  }
 }
