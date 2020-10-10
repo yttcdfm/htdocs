@@ -12,6 +12,7 @@ div.header{
   width: 100%;
   position: fixed;
   background-color: rgb(247, 37, 154);
+  z-index: 1;
 }
 h1{
   padding-left: 5px;
